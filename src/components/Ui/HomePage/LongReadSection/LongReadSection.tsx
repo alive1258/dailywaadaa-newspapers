@@ -5,18 +5,17 @@ import type { Article } from "@/src/types/types";
 import { longReadCarousel } from "@/src/utils/data/longReadData";
 import Carousel from "@/src/components/Common/Carousel/Carousel";
 
-/* ── Card shown inside the carousel ── */
 function SlideCard({ article }: { article: Article }) {
   return (
     <Link href={`/news/${article.slug}`} className="block group/slide">
       <article className="flex flex-col">
-        <div className="relative aspect-16/10 overflow-hidden rounded-md bg-gray-100">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-md bg-gray-100">
           {article.image && (
             <Image
               src={article.image}
               alt={article.title}
               fill
-              sizes="(max-width: 1024px) 50vw, 20vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
               className="object-cover transition duration-500 group-hover/slide:scale-105"
             />
           )}
@@ -46,7 +45,6 @@ export default function LongReadSection() {
 
   return (
     <section className="container py-10">
-      {/* Header */}
       <div className="flex items-center justify-between border-b-2 border-brand-900 pb-2 mb-6">
         <h2 className="font-serif text-2xl font-bold text-brand-900 uppercase tracking-wide">
           Long Read
@@ -59,9 +57,9 @@ export default function LongReadSection() {
         </Link>
       </div>
 
-      {/* Carousel — 4 cards per page with left/right buttons */}
-      <div className="px-8">
-        <Carousel slides={slides} perView={4} />
+      {/* ✅ no perView — Carousel auto-detects 1/2/4 by screen size */}
+      <div className="sm:px-8">
+        <Carousel slides={slides} />
       </div>
     </section>
   );

@@ -1,20 +1,17 @@
 import type { Metadata, Viewport } from "next";
+
 import {
   Inter,
   Noto_Sans_Bengali,
   Noto_Serif_Bengali,
   Playfair_Display,
 } from "next/font/google";
-import "./globals.css";
 
+import "./globals.css";
 import ToastProvider from "../components/Common/ToastProvider/ToastProvider";
 
 /* =========================================================
    FONTS
-   - Inter          → UI + body (English)
-   - Playfair       → headlines (English, editorial feel)
-   - Noto Bengali   → Bangla body
-   - Noto Serif BN  → Bangla headlines
    ========================================================= */
 
 const inter = Inter({
@@ -46,12 +43,16 @@ const bengaliSerif = Noto_Serif_Bengali({
 });
 
 /* =========================================================
-   METADATA
+   SITE CONFIG
    ========================================================= */
 
 const SITE_URL = "https://www.dailywaadaa.com";
 const SITE_NAME = "Dailywaadaa";
 const SITE_TAGLINE = "Breaking News, Bangladesh & World";
+
+/* =========================================================
+   METADATA
+   ========================================================= */
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
 
   keywords: [
     "Dailywaadaa",
-    "daily waadaa",
+    "Daily Waadaa",
     "Bangladesh news",
     "breaking news",
     "Bangla news",
@@ -81,19 +82,31 @@ export const metadata: Metadata = {
     "long read",
   ],
 
-  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  authors: [
+    {
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  ],
+
   creator: SITE_NAME,
   publisher: SITE_NAME,
-
   category: "news",
 
-  /* Open Graph */
+  /* =======================================================
+     OPEN GRAPH
+     ======================================================= */
+
   openGraph: {
     title: `${SITE_NAME} | ${SITE_TAGLINE}`,
+
     description:
       "Latest breaking news from Bangladesh and the world — politics, business, sports, opinion, and more.",
+
     url: SITE_URL,
+
     siteName: SITE_NAME,
+
     images: [
       {
         url: "/images/og-dailywaadaa.jpg",
@@ -102,60 +115,100 @@ export const metadata: Metadata = {
         alt: "Dailywaadaa — Breaking News, Bangladesh & World",
       },
     ],
+
     locale: "en_US",
+
     alternateLocale: ["bn_BD"],
+
     type: "website",
   },
 
-  /* Twitter / X */
+  /* =======================================================
+     TWITTER / X
+     ======================================================= */
+
   twitter: {
     card: "summary_large_image",
+
     site: "@isdailywaadaa",
+
     creator: "@isdailywaadaa",
+
     title: `${SITE_NAME} | ${SITE_TAGLINE}`,
+
     description:
       "Latest breaking news from Bangladesh and the world — politics, business, sports, opinion, and more.",
+
     images: ["/images/og-dailywaadaa.jpg"],
   },
 
-  /* Robots */
+  /* =======================================================
+     ROBOTS
+     ======================================================= */
+
   robots: {
     index: true,
     follow: true,
     nocache: false,
+
     googleBot: {
       index: true,
       follow: true,
+
       "max-video-preview": -1,
+
       "max-image-preview": "large",
+
       "max-snippet": -1,
     },
   },
 
-  /* Canonical + hreflang (optional Bangla locale) */
+  /* =======================================================
+     CANONICAL + HREFLANG
+     ======================================================= */
+
   alternates: {
     canonical: SITE_URL,
+
     languages: {
       "en-US": SITE_URL,
       "bn-BD": `${SITE_URL}/bn`,
     },
   },
 
-  /* Icons */
+  /* =======================================================
+     ICONS
+     ======================================================= */
+
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml",
+      },
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
     ],
+
     shortcut: "/favicon.ico",
+
     apple: "/apple-touch-icon.png",
   },
 
-  /* App info */
+  /* =======================================================
+     APPLICATION
+     ======================================================= */
+
   applicationName: SITE_NAME,
+
   referrer: "origin-when-cross-origin",
 
-  /* Format detection */
+  /* =======================================================
+     FORMAT DETECTION
+     ======================================================= */
+
   formatDetection: {
     email: false,
     address: false,
@@ -163,11 +216,17 @@ export const metadata: Metadata = {
   },
 };
 
-/* Viewport (separate export in Next 14+) */
+/* =========================================================
+   VIEWPORT
+   ========================================================= */
+
 export const viewport: Viewport = {
   themeColor: "#c81e1e",
+
   width: "device-width",
+
   initialScale: 1,
+
   maximumScale: 5,
 };
 
@@ -177,9 +236,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
@@ -192,6 +251,7 @@ export default function RootLayout({
         ].join(" ")}
       >
         {children}
+
         <ToastProvider />
       </body>
     </html>

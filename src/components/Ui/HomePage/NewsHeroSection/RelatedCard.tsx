@@ -9,19 +9,21 @@ export default function RelatedCard({ article }: { article: Article }) {
       {/* Thumbnail */}
       <Link
         href={`/news/${article.slug}`}
-        className="relative block aspect-16/10 overflow-hidden"
+        className="relative block aspect-[16/10] overflow-hidden bg-gray-100"
       >
-        <Image
-          src={article.image}
-          alt={article.title}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover transition duration-500 group-hover:scale-105"
-        />
+        {article.image && (
+          <Image
+            src={article.image}
+            alt={article.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-cover transition duration-500 group-hover:scale-105"
+          />
+        )}
 
         {/* Category badge over the image */}
         {article.category && (
-          <span className="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md">
+          <span className="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md z-10">
             {article.category}
           </span>
         )}

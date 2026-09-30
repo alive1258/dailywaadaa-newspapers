@@ -32,16 +32,18 @@ export default function NewsHeroSection({
         {/* ── LEFT: FEATURED STORY ─────────────────────── */}
         <article className="group md:col-span-2">
           <Link href={`/news/${featured.slug}`} className="block">
-            <div className="relative aspect-16/10 overflow-hidden rounded-lg">
-              <Image
-                src={featured.image}
-                alt={featured.title}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover transition duration-500 group-hover:scale-105"
-                priority
-              />
-            </div>
+            {featured.image && (
+              <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-gray-100">
+                <Image
+                  src={featured.image}
+                  alt={featured.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition duration-500 group-hover:scale-105"
+                  priority
+                />
+              </div>
+            )}
 
             {featured.category && (
               <span className="inline-block mt-4 text-xs font-semibold uppercase tracking-wider text-accent-500">
@@ -105,15 +107,17 @@ export default function NewsHeroSection({
                   </div>
 
                   {/* Thumbnail */}
-                  <div className="relative w-28 h-20 sm:w-32 sm:h-22 shrink-0 overflow-hidden rounded-md">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      sizes="140px"
-                      className="object-cover transition duration-500 group-hover:scale-105"
-                    />
-                  </div>
+                  {item.image && (
+                    <div className="relative w-28 h-20 sm:w-32 sm:h-22 shrink-0 overflow-hidden rounded-md bg-gray-100">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        sizes="140px"
+                        className="object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  )}
                 </Link>
               </article>
             ))}
